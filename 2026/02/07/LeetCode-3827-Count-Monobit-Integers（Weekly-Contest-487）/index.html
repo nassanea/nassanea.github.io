@@ -27,7 +27,7 @@
 <meta property="og:description" content="題目：3827.Count Monobit Integers  問題描述給予一個數字 n，要求回傳 0~n 中二進位制的數字由左到右全部相同的數字之數量，這種數字稱為 Monobit。例如：  給定 n&#x3D;1（0~1） 因為 $$(0){10}&#x3D;(0)2, \ \ (1){10}&#x3D;(1){2}$$，所以回傳值是 2 給定 n&#x3D;4（0~4） 因為只有 $$(0)_{10">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2026-02-07T09:22:57.000Z">
-<meta property="article:modified_time" content="2026-02-07T11:22:21.809Z">
+<meta property="article:modified_time" content="2026-02-07T11:24:40.542Z">
 <meta property="article:author" content="Jane Doe">
 <meta property="article:tag" content="easy">
 <meta property="article:tag" content="weekly-contest">
@@ -305,7 +305,7 @@
 <li>… 以此類推<br>可以找到這些 Monobit 的規律公式是 $2^k-1$，而 <code>k</code> 的值正好等於 0 以外的 Monobit 之數量，因為：$111_2 &#x3D; 2^3 - 1 &#x3D; 8 - 1$ 為例，這時假設 n&#x3D;7，可以回傳的 Monobit 有 0,1,3,7，扣除 0 以外正好 3 個 &#x3D; k 的值，所以只要回傳 <code>k 值 +1</code> 就是正確答案。<br>那接下來的重點就是找到這個 k 應該是多少了</li>
 </ul>
 <p>而 k 的找法：<br>需要建立 n 和 k 之間的等式，同樣以 $111_2 &#x3D; 2^3 - 1 &#x3D; 8 - 1$ 為例，這時 $2^3 -1&#x3D;7$，正好等於 7<br>可以寫出等式$$2^k - 1 \le n$$，假設 n&#x3D;7，那 $2^1- 1$,$2^2-1$, $2^3-1$ 都是合法值</p>
-<p>以此等式進行一項以求出 k 值：<br>$$\begin{aligned}<br>2^k &amp;&#x3D; n+1 \<br>\rightarrow k &amp;&#x3D; \log_2(n+1)<br>\end{aligned}$$<br>因此 k 值等於對 (n+1) 取 $log_2$ 值</p>
+<p>以此等式進行一項以求出 k 值：<br>$$\2^k &amp;&#x3D; n+1 $$<br>$$\rightarrow k &amp;&#x3D; \log_2(n+1)$$<br>因此 k 值等於對 (n+1) 取 $log_2$ 值</p>
 <p>而實際的程式碼撰寫，因為 java 沒有內建的 $\log_2$ 函數，只有以 $e$ 為底的自然對數 $\log_e &#x3D; \ln$，所以使用換底公式的概念算出：$$\log_A(B)&#x3D; \dfrac{\log_C(B)}{\log_C(A)}$$因此$$\log_2(n+1) &#x3D; \dfrac{\log_e(n+1)}{\log_e(2)}$$<br>那麼就可以寫出程式碼如下：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">countMonobit</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> &#123;<br>        <span class="hljs-keyword">return</span> (<span class="hljs-type">int</span>)(Math.log(n+<span class="hljs-number">1</span>) / Math.log(<span class="hljs-number">2</span>)) +<span class="hljs-number">1</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
