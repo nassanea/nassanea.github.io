@@ -4,6 +4,68 @@
   
   
   <entry>
+    <title>LeetCode-3842. Toggle Light Bulbs（Weekly Contest 489）</title>
+    <link href="/2026/02/19/LeetCode-3842-Toggle-Light-Bulbs%EF%BC%88Weekly-Contest-489%EF%BC%89/"/>
+    <url>/2026/02/19/LeetCode-3842-Toggle-Light-Bulbs%EF%BC%88Weekly-Contest-489%EF%BC%89/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p>題目：<a href="https://leetcode.com/problems/toggle-light-bulbs/description/">3842. Toggle Light Bulbs</a></p></blockquote><p>——待補充。</p><h1 id="問題描述"><a href="#問題描述" class="headerlink" title="問題描述"></a>問題描述</h1><h1 id="解題思路"><a href="#解題思路" class="headerlink" title="解題思路"></a>解題思路</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> List&lt;Integer&gt; <span class="hljs-title function_">toggleLightBulbs</span><span class="hljs-params">(List&lt;Integer&gt; bulbs)</span> &#123;<br>        <span class="hljs-comment">// 初始狀態所有燈泡都是關掉的</span><br>        <span class="hljs-comment">// 如果關閉就打開，如果打開就關閉</span><br>        <span class="hljs-comment">// bulbs[i] = k 的值代表了「第 k 個燈泡」 的意思</span><br>        <span class="hljs-comment">// 最後要回傳一個 List，裡面是第 k 個燈泡是打開的，這些 k 們都要按照順序排過</span><br>        <span class="hljs-comment">// 如果所有燈泡都被關閉，就回傳空 List</span><br><br>        <span class="hljs-comment">// 宣告最後要回傳的 ArrayList</span><br>        List&lt;Integer&gt; OnBulbs = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span>( Integer b : bulbs)&#123;<br>            <span class="hljs-comment">// 實際上只有出現偶數次的燈泡最後會被關掉，出現奇數的燈泡最後都會被打開</span><br>            <span class="hljs-comment">// 出現一次 -&gt; 打開</span><br>            <span class="hljs-comment">// 出現二次 -&gt; 關掉</span><br>            <span class="hljs-comment">// 出現三次 -&gt; 打開</span><br>            <span class="hljs-keyword">if</span>(!OnBulbs.contains(b))&#123; <span class="hljs-comment">// 如果不存在該元素，就加入他 </span><br>                OnBulbs.add(b); <span class="hljs-comment">// </span><br>            &#125;<span class="hljs-keyword">else</span>&#123; <span class="hljs-comment">// 反之，已經存在該元素，就移除他，代表他這時要被關掉了</span><br>                OnBulbs.remove(Integer.valueOf(b));<br>            &#125;<br>        &#125;<br><br><br>        <br>        <span class="hljs-keyword">if</span>(!OnBulbs.isEmpty())&#123; <span class="hljs-comment">// 如果陣列非空，進行排序後回傳</span><br>            Collections.sort(OnBulbs);<br>            <span class="hljs-keyword">return</span> OnBulbs;<br>        &#125;<span class="hljs-keyword">else</span>&#123; <span class="hljs-comment">// 如果陣列為空，直接回傳空陣列</span><br>            <span class="hljs-keyword">return</span> OnBulbs;<br>        &#125;<br>        <br>        <br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><p>使用 ArrayList 當成「新增」、「移除」的資料結構會使這一題的時間複雜度變成 $O(N^2)$，把資料結構調整成新增和刪除操作都很快速的 Set 後，可以改善時間問題，程式碼如下：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.*;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> List&lt;Integer&gt; <span class="hljs-title function_">toggleLightBulbs</span><span class="hljs-params">(List&lt;Integer&gt; bulbs)</span> &#123;<br>        <span class="hljs-comment">// 用 HashSet</span><br>        Set&lt;Integer&gt; bulbSet = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashSet</span>&lt;&gt;();<br><br>        <span class="hljs-keyword">for</span>(Integer b : bulbs)&#123;<br>            <span class="hljs-keyword">if</span>(bulbSet.contains(b))&#123;<br>                bulbSet.remove(b);<br>            &#125;<span class="hljs-keyword">else</span>&#123;<br>                bulbSet.add(b);<br>            &#125;<br>        &#125;<br>        List&lt;Integer&gt; result = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;(bulbSet);<br>        Collections.sort(result);<br>        <span class="hljs-keyword">return</span> result;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><table><thead><tr><th><strong>特性</strong></th><th><strong>舊版本 (ArrayList)</strong></th><th><strong>新版本 (HashSet)</strong></th></tr></thead><tbody><tr><td><strong>查詢 (contains)</strong></td><td>$O(N)$ (要從頭掃描)</td><td><strong>$O(1)$ (直接定位)</strong></td></tr><tr><td><strong>刪除 (remove)</strong></td><td>$O(N)$ (要掃描 + 移動元素)</td><td><strong>$O(1)$ (直接拿走)</strong></td></tr><tr><td><strong>整體時間複雜度</strong></td><td><strong>$O(N^2)$</strong> (很慢)</td><td><strong>$O(N)$</strong> (前面迴圈) + $O(N \log N)$ (最後排序)</td></tr><tr><td><strong>空間複雜度</strong></td><td>$O(N)$</td><td>$O(N)$</td></tr><tr><td><strong>適用場景</strong></td><td>資料量極小 (N &lt; 5000)</td><td><strong>通用解法，可處理大數據</strong></td></tr></tbody></table>]]></content>
+    
+    
+    <categories>
+      
+      <category>Algorithm</category>
+      
+      <category>LeetCode</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>easy</tag>
+      
+      <tag>weekly-contest</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>LeetCode-3838. Weighted Word Mapping（Biweekly Contest 176）</title>
+    <link href="/2026/02/19/LeetCode-3838-Weighted-Word-Mapping%EF%BC%88Biweekly-Contest-176%EF%BC%89/"/>
+    <url>/2026/02/19/LeetCode-3838-Weighted-Word-Mapping%EF%BC%88Biweekly-Contest-176%EF%BC%89/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p>題目：<a href="https://leetcode.com/problems/weighted-word-mapping/description/">3838. Weighted Word Mapping</a></p></blockquote><h1 id="問題描述"><a href="#問題描述" class="headerlink" title="問題描述"></a>問題描述</h1><p>題目會給予一個字串陣列，裡面有數個長度不等的英文單字字串 <code>words[]</code>，以及一個長度為 26 的權重陣列 <code>weights[]</code>，其中 <code>weights[i]</code> 為第 <code>i</code> 個字母的對應權重，例如 <code>weights[0]</code> 為 <code>a</code> 的對應權重<br>題目定義單一字串的權重等於所組成他字母的權重總和<br>最後，題目要求回傳： 「<code>words[]</code> 中每個單字字串的權重總和」各自對 <code>26</code> 取餘數後，以逆順序所對應到的 26 個字母，再把所對應到的逆順序字母串接起來</p><p>例如：<br><strong>Input:</strong> <code>words = [&quot;abcd&quot;,&quot;def&quot;,&quot;xyz&quot;]</code>, <code>weights = [5,3,12,14,1,2,3,2,10,6,6,9,7,8,7,10,8,9,6,9,9,8,3,7,7,2]</code><br><strong>Output:</strong> <code>&quot;rij&quot;</code></p><p>就是 <code>a</code> 對應到 <code>weights[0]=5</code>，<code>b</code> 對應到 <code>weights[1]=3</code>，所以字串 <code>abcd</code> 權重總和為 <code>5+3+12+14 = 34</code><br><code>34%26=8</code>，而以逆順序把 <code>8</code>對應到 26 個字母是 <code>r</code>（<code>0</code> 對應到 <code>z</code>；<code>1</code> 對應到 <code>y</code>，以此類推。）</p><h1 id="解題思路"><a href="#解題思路" class="headerlink" title="解題思路"></a>解題思路</h1><p>遍歷 words 陣列中的每個字串，加總去計算其單字權重<br>權重計算的方式用該字母的 ASCII code 減去 97 可以得出該字母是第 <code>k</code> 個單字的結果，就可以求出其在 <code>weights[i]</code> 的對應權重</p><p>再一一計算每個單字字串之權重對 26 取餘數的結果 <code>mod</code>，並利用公式 <code>(25 - mod) + 97</code> 決定結果字母<br>這實際上是將餘數反向映射（0 對應 ‘z’，25 對應 ‘a’）<br>再把得出的字母 append 到 result 後方，外回圈結束後回傳 result</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">mapWordWeights</span><span class="hljs-params">(String[] words, <span class="hljs-type">int</span>[] weights)</span> &#123;<br>        <span class="hljs-comment">// a = &#x27;a&#x27; -&gt; 0 = 97 [0]</span><br>        <span class="hljs-comment">// b -&gt; 98 = a+1 [1]</span><br>        <span class="hljs-type">String</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;&quot;</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j=<span class="hljs-number">0</span>; j&lt;words.length; j++)&#123; <span class="hljs-comment">// 循環整個 words 陣列裡面每個單字</span><br>            <span class="hljs-type">String</span> <span class="hljs-variable">target</span> <span class="hljs-operator">=</span> words[j]; <span class="hljs-comment">// 當回要計算的單字</span><br>            <span class="hljs-type">int</span> <span class="hljs-variable">weightSum</span> <span class="hljs-operator">=</span><span class="hljs-number">0</span>; <span class="hljs-comment">// 宣告一個變數用來裝這個單字的權重總和</span><br>            <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>; i&lt;target.length(); i++)&#123; <span class="hljs-comment">// 循環單個單字的每個字母求出權重加總</span><br>                weightSum += weights[target.charAt(i) - <span class="hljs-number">97</span>];<br>            &#125;<br>            <span class="hljs-comment">// 單一個單字結束，求出 weightSum 取餘數的結果</span><br>            <span class="hljs-type">int</span> <span class="hljs-variable">mod</span> <span class="hljs-operator">=</span> weightSum%<span class="hljs-number">26</span>;<br>            <span class="hljs-type">char</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> (<span class="hljs-type">char</span>)((<span class="hljs-number">25</span>-mod) + <span class="hljs-number">97</span>);<br>            result += c;<br>            <br>        &#125;<br>        <span class="hljs-keyword">return</span> result;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><p>用 StringBuilder 優化速度</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">mapWordWeights</span><span class="hljs-params">(String[] words, <span class="hljs-type">int</span>[] weights)</span> &#123;<br>        <span class="hljs-type">StringBuilder</span> <span class="hljs-variable">sb</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>(); <span class="hljs-comment">// 使用 StringBuilder 優化</span><br>        <span class="hljs-keyword">for</span>(String target : words)&#123; <span class="hljs-comment">// 循環整個 words 陣列裡面每個單字</span><br>            <span class="hljs-type">int</span> <span class="hljs-variable">weightSum</span> <span class="hljs-operator">=</span><span class="hljs-number">0</span>; <span class="hljs-comment">// 宣告一個變數用來裝這個單字的權重總和</span><br>            <span class="hljs-keyword">for</span>(<span class="hljs-type">char</span> c : target.toCharArray())&#123; <span class="hljs-comment">// 循環單個單字的每個字母求出權重加總</span><br>                weightSum += weights[c - <span class="hljs-string">&#x27;a&#x27;</span>];<br>            &#125;<br>            <span class="hljs-comment">// 單一個單字結束，求出 weightSum 取餘數的結果</span><br>            <span class="hljs-type">int</span> <span class="hljs-variable">mod</span> <span class="hljs-operator">=</span> weightSum%<span class="hljs-number">26</span>;<br>            <span class="hljs-type">char</span> <span class="hljs-variable">mappedChar</span> <span class="hljs-operator">=</span> (<span class="hljs-type">char</span>)((<span class="hljs-number">25</span>-mod) + <span class="hljs-string">&#x27;a&#x27;</span>);<br>            sb.append(mappedChar);<br>            <br>        &#125;<br>        <span class="hljs-keyword">return</span> sb.toString();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>Algorithm</category>
+      
+      <category>LeetCode</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>easy</tag>
+      
+      <tag>biweekly-contest</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>LeetCode-225.Implement Stack using Queues</title>
     <link href="/2026/02/13/LeetCode-225-Implement-Stack-using-Queues/"/>
     <url>/2026/02/13/LeetCode-225-Implement-Stack-using-Queues/</url>
@@ -22,9 +84,9 @@
     
     <tags>
       
-      <tag>easy</tag>
-      
       <tag>leetcode</tag>
+      
+      <tag>easy</tag>
       
     </tags>
     
@@ -62,9 +124,9 @@
     
     <tags>
       
-      <tag>easy</tag>
-      
       <tag>leetcode</tag>
+      
+      <tag>easy</tag>
       
     </tags>
     
@@ -83,9 +145,9 @@
     
     <tags>
       
-      <tag>easy</tag>
-      
       <tag>leetcode</tag>
+      
+      <tag>easy</tag>
       
       <tag>weekly-contest</tag>
       
