@@ -19,24 +19,24 @@
   <meta name="author" content="Jane Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="題目：3842. Toggle Light Bulbs  ——待補充。 問題描述解題思路12345678910111213141516171819202122232425262728293031323334class Solution &#123;    public List&lt;Integer&gt; toggleLightBulbs(List&lt;Integer&gt; bulbs)">
+    <meta name="description" content="題目：3847. Find the Score Difference in a Game  問題描述給予一個分數陣列 nums[]，nums[i] 代表第 i 輪比賽的比賽分數，要根據以下規則把該分數給予兩位選手的其中一位，最後回傳的 first - second 選手的分數差遊戲把兩位選手分成主動方和被動方，初始狀態會設定第一位選手為主動方，因此我們做以下設定  預設的第一位選手（主動方）設為">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LeetCode-3842. Toggle Light Bulbs（Weekly Contest 489）">
-<meta property="og:url" content="http://example.com/2026/02/19/LeetCode-3842-Toggle-Light-Bulbs%EF%BC%88Weekly-Contest-489%EF%BC%89/index.html">
+<meta property="og:title" content="LeetCode-3847. Find the Score Difference in a Game（Weekly Contest 490）">
+<meta property="og:url" content="http://example.com/2026/02/26/LeetCode-3847-Find-the-Score-Difference-in-a-Game%EF%BC%88Weekly-Contest-490%EF%BC%89/index.html">
 <meta property="og:site_name" content="筆記記錄">
-<meta property="og:description" content="題目：3842. Toggle Light Bulbs  ——待補充。 問題描述解題思路12345678910111213141516171819202122232425262728293031323334class Solution &#123;    public List&lt;Integer&gt; toggleLightBulbs(List&lt;Integer&gt; bulbs)">
+<meta property="og:description" content="題目：3847. Find the Score Difference in a Game  問題描述給予一個分數陣列 nums[]，nums[i] 代表第 i 輪比賽的比賽分數，要根據以下規則把該分數給予兩位選手的其中一位，最後回傳的 first - second 選手的分數差遊戲把兩位選手分成主動方和被動方，初始狀態會設定第一位選手為主動方，因此我們做以下設定  預設的第一位選手（主動方）設為">
 <meta property="og:locale" content="zh_TW">
-<meta property="article:published_time" content="2026-02-19T02:41:26.000Z">
-<meta property="article:modified_time" content="2026-02-26T02:38:59.256Z">
+<meta property="article:published_time" content="2026-02-26T02:38:05.000Z">
+<meta property="article:modified_time" content="2026-02-26T02:40:23.947Z">
 <meta property="article:author" content="Jane Doe">
 <meta property="article:tag" content="leetcode">
-<meta property="article:tag" content="easy">
 <meta property="article:tag" content="weekly-contest">
+<meta property="article:tag" content="medium">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>LeetCode-3842. Toggle Light Bulbs（Weekly Contest 489） - 筆記記錄</title>
+  <title>LeetCode-3847. Find the Score Difference in a Game（Weekly Contest 490） - 筆記記錄</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -202,7 +202,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="LeetCode-3842. Toggle Light Bulbs（Weekly Contest 489）"></span>
+            <span id="subtitle" data-typed-text="LeetCode-3847. Find the Score Difference in a Game（Weekly Contest 490）"></span>
           
         </div>
 
@@ -213,8 +213,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2026-02-19 10:41" pubdate>
-          2026年2月19日 上午
+        <time datetime="2026-02-26 10:38" pubdate>
+          2026年2月26日 上午
         </time>
       </span>
     
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          510 字
+          520 字
         
       </span>
     
@@ -273,55 +273,75 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">LeetCode-3842. Toggle Light Bulbs（Weekly Contest 489）</h1>
+            <h1 id="seo-header">LeetCode-3847. Find the Score Difference in a Game（Weekly Contest 490）</h1>
             
             
               <div class="markdown-body">
                 
                 <blockquote>
-<p>題目：<a href="https://leetcode.com/problems/toggle-light-bulbs/description/">3842. Toggle Light Bulbs</a></p>
+<p>題目：<a href="https://leetcode.com/problems/find-the-score-difference-in-a-game/description/">3847. Find the Score Difference in a Game</a></p>
 </blockquote>
-<p>——待補充。</p>
-<h1 id="問題描述"><a href="#問題描述" class="headerlink" title="問題描述"></a>問題描述</h1><h1 id="解題思路"><a href="#解題思路" class="headerlink" title="解題思路"></a>解題思路</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> List&lt;Integer&gt; <span class="hljs-title function_">toggleLightBulbs</span><span class="hljs-params">(List&lt;Integer&gt; bulbs)</span> &#123;<br>        <span class="hljs-comment">// 初始狀態所有燈泡都是關掉的</span><br>        <span class="hljs-comment">// 如果關閉就打開，如果打開就關閉</span><br>        <span class="hljs-comment">// bulbs[i] = k 的值代表了「第 k 個燈泡」 的意思</span><br>        <span class="hljs-comment">// 最後要回傳一個 List，裡面是第 k 個燈泡是打開的，這些 k 們都要按照順序排過</span><br>        <span class="hljs-comment">// 如果所有燈泡都被關閉，就回傳空 List</span><br><br>        <span class="hljs-comment">// 宣告最後要回傳的 ArrayList</span><br>        List&lt;Integer&gt; OnBulbs = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span>( Integer b : bulbs)&#123;<br>            <span class="hljs-comment">// 實際上只有出現偶數次的燈泡最後會被關掉，出現奇數的燈泡最後都會被打開</span><br>            <span class="hljs-comment">// 出現一次 -&gt; 打開</span><br>            <span class="hljs-comment">// 出現二次 -&gt; 關掉</span><br>            <span class="hljs-comment">// 出現三次 -&gt; 打開</span><br>            <span class="hljs-keyword">if</span>(!OnBulbs.contains(b))&#123; <span class="hljs-comment">// 如果不存在該元素，就加入他 </span><br>                OnBulbs.add(b); <span class="hljs-comment">// </span><br>            &#125;<span class="hljs-keyword">else</span>&#123; <span class="hljs-comment">// 反之，已經存在該元素，就移除他，代表他這時要被關掉了</span><br>                OnBulbs.remove(Integer.valueOf(b));<br>            &#125;<br>        &#125;<br><br><br>        <br>        <span class="hljs-keyword">if</span>(!OnBulbs.isEmpty())&#123; <span class="hljs-comment">// 如果陣列非空，進行排序後回傳</span><br>            Collections.sort(OnBulbs);<br>            <span class="hljs-keyword">return</span> OnBulbs;<br>        &#125;<span class="hljs-keyword">else</span>&#123; <span class="hljs-comment">// 如果陣列為空，直接回傳空陣列</span><br>            <span class="hljs-keyword">return</span> OnBulbs;<br>        &#125;<br>        <br>        <br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p>使用 ArrayList 當成「新增」、「移除」的資料結構會使這一題的時間複雜度變成 $O(N^2)$，把資料結構調整成新增和刪除操作都很快速的 Set 後，可以改善時間問題，程式碼如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.*;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> List&lt;Integer&gt; <span class="hljs-title function_">toggleLightBulbs</span><span class="hljs-params">(List&lt;Integer&gt; bulbs)</span> &#123;<br>        <span class="hljs-comment">// 用 HashSet</span><br>        Set&lt;Integer&gt; bulbSet = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashSet</span>&lt;&gt;();<br><br>        <span class="hljs-keyword">for</span>(Integer b : bulbs)&#123;<br>            <span class="hljs-keyword">if</span>(bulbSet.contains(b))&#123;<br>                bulbSet.remove(b);<br>            &#125;<span class="hljs-keyword">else</span>&#123;<br>                bulbSet.add(b);<br>            &#125;<br>        &#125;<br>        List&lt;Integer&gt; result = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;(bulbSet);<br>        Collections.sort(result);<br>        <span class="hljs-keyword">return</span> result;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-
+<h1 id="問題描述"><a href="#問題描述" class="headerlink" title="問題描述"></a>問題描述</h1><p>給予一個分數陣列 <code>nums[]</code>，<code>nums[i]</code> 代表第 <code>i</code> 輪比賽的比賽分數，要根據以下規則把該分數給予兩位選手的其中一位，最後回傳的 <code>first</code> - <code>second</code> 選手的分數差<br>遊戲把兩位選手分成主動方和被動方，初始狀態會設定第一位選手為主動方，因此我們做以下設定</p>
+<ul>
+<li>預設的第一位選手（主動方）設為 <code>first</code></li>
+<li>另一位是 <code>second</code></li>
+</ul>
+<p>規則是</p>
+<ul>
+<li><code>nums[i]</code> 為 odd，那攻守交換</li>
+<li><code>nums[i]</code> 為 even，攻守不換</li>
+<li><code>i</code> 為每週期第六場比賽時，會再進行一次攻守交換，所以 <code>i</code> 是 5, 11, 17,…</li>
+<li>第 <code>i</code> 場比賽的分數 <code>nums[i]</code> 會由主動方收下</li>
+<li>要回傳的分數差是 <code>first - second</code></li>
+</ul>
+<h1 id="解題思路"><a href="#解題思路" class="headerlink" title="解題思路"></a>解題思路</h1><p>解法是用一個 boolean 值去判斷當前主動方（active）是哪個人：</p>
+<ul>
+<li><code>true</code> 代表 <code>active</code> 是 <code>first</code></li>
+<li><code>false</code> 代表 <code>active</code> 是 <code>second</code></li>
+</ul>
+<p>會有以下四種情況，只有其中的兩種最終需要換手</p>
 <table>
 <thead>
 <tr>
-<th><strong>特性</strong></th>
-<th><strong>舊版本 (ArrayList)</strong></th>
-<th><strong>新版本 (HashSet)</strong></th>
+<th>odd</th>
+<th>6th</th>
+<th>swap?</th>
 </tr>
 </thead>
 <tbody><tr>
-<td><strong>查詢 (contains)</strong></td>
-<td>$O(N)$ (要從頭掃描)</td>
-<td><strong>$O(1)$ (直接定位)</strong></td>
+<td>T</td>
+<td>F</td>
+<td>T</td>
 </tr>
 <tr>
-<td><strong>刪除 (remove)</strong></td>
-<td>$O(N)$ (要掃描 + 移動元素)</td>
-<td><strong>$O(1)$ (直接拿走)</strong></td>
+<td>F</td>
+<td>T</td>
+<td>T</td>
 </tr>
 <tr>
-<td><strong>整體時間複雜度</strong></td>
-<td><strong>$O(N^2)$</strong> (很慢)</td>
-<td><strong>$O(N)$</strong> (前面迴圈) + $O(N \log N)$ (最後排序)</td>
+<td>T</td>
+<td>T</td>
+<td>F</td>
 </tr>
 <tr>
-<td><strong>空間複雜度</strong></td>
-<td>$O(N)$</td>
-<td>$O(N)$</td>
-</tr>
-<tr>
-<td><strong>適用場景</strong></td>
-<td>資料量極小 (N &lt; 5000)</td>
-<td><strong>通用解法，可處理大數據</strong></td>
+<td>F</td>
+<td>F</td>
+<td>F</td>
 </tr>
 </tbody></table>
+<p>  所以程式邏輯的方法為</p>
+<ol>
+<li>設置布林值判斷當前 active</li>
+<li>遍歷 <code>nums[]</code> 陣列</li>
+<li>判斷 <code>nums[i]%2!=0</code> 時為 odd 且 <code>(i+1)%6!=0</code> 不為 6th 比賽，會換手一次，或是 <code>nums[i]%2!==0</code> 時為 even 且 <code>(i+1)%6==0</code> 為 6th 比賽，也會換手一次</li>
+<li>若非上述情況，則不換手</li>
+<li>換手邏輯處理完，即可 assign 分數給 first &#x2F; second 玩家</li>
+<li>回傳分數差</li>
+</ol>
+<p>這樣解法的時間複雜度是 $O(n)$；空間複雜度是 $O(1)$</p>
+<p>程式碼：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">scoreDifference</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums)</span> &#123;<br>        <span class="hljs-comment">// 分數差是 first - second</span><br>        <span class="hljs-comment">// 最多就是 1000 場比賽</span><br>        <span class="hljs-comment">// 每場比賽分數不超過 1000 分</span><br><br>        <span class="hljs-type">int</span> <span class="hljs-variable">first</span> <span class="hljs-operator">=</span><span class="hljs-number">0</span>; <span class="hljs-comment">// 先手的分數</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">second</span> <span class="hljs-operator">=</span><span class="hljs-number">0</span>; <span class="hljs-comment">// 後手的分數</span><br>        <br>        <br>        <span class="hljs-type">boolean</span> <span class="hljs-variable">act</span> <span class="hljs-operator">=</span> <span class="hljs-literal">true</span>; <span class="hljs-comment">// 判定當前 active 是誰 預設 true 是 first</span><br><br>        <span class="hljs-comment">// 四種情況</span><br>        <span class="hljs-comment">// odd &amp; i is 6th -&gt; not swap</span><br>        <span class="hljs-comment">// odd &amp; i is not 6th -&gt; swap</span><br>        <span class="hljs-comment">// even &amp; i is 6th -&gt; swap</span><br>        <span class="hljs-comment">// even &amp; i is not 6th -&gt; not swap</span><br><br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>; i&lt;nums.length; i++)&#123;<br>            <span class="hljs-keyword">if</span>( (nums[i]%<span class="hljs-number">2</span>!=<span class="hljs-number">0</span> &amp;&amp; (i+<span class="hljs-number">1</span>)%<span class="hljs-number">6</span>!=<span class="hljs-number">0</span>) ||<br>                (nums[i]%<span class="hljs-number">2</span>==<span class="hljs-number">0</span> &amp;&amp; (i+<span class="hljs-number">1</span>)%<span class="hljs-number">6</span>==<span class="hljs-number">0</span>)<br>            )&#123;<br>                act = !act; <span class="hljs-comment">// 要換一次手</span><br>            &#125;<br>            <br>            <span class="hljs-comment">// 判斷是否換手結束</span><br>            <span class="hljs-comment">// 給予分數階段</span><br>            <span class="hljs-keyword">if</span>(act) first += nums[i];<br>            <span class="hljs-keyword">else</span> second += nums[i];<br>        &#125;<br><br>        <span class="hljs-type">int</span> <span class="hljs-variable">difference</span>  <span class="hljs-operator">=</span> first - second;<br>        <span class="hljs-keyword">return</span> difference;<br>        <br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 
                 
               </div>
@@ -364,9 +384,9 @@
       
         <a href="/tags/leetcode/" class="print-no-link">#leetcode</a>
       
-        <a href="/tags/easy/" class="print-no-link">#easy</a>
-      
         <a href="/tags/weekly-contest/" class="print-no-link">#weekly-contest</a>
+      
+        <a href="/tags/medium/" class="print-no-link">#medium</a>
       
     </div>
   
@@ -378,8 +398,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>LeetCode-3842. Toggle Light Bulbs（Weekly Contest 489）</div>
-      <div>http://example.com/2026/02/19/LeetCode-3842-Toggle-Light-Bulbs（Weekly-Contest-489）/</div>
+      <div>LeetCode-3847. Find the Score Difference in a Game（Weekly Contest 490）</div>
+      <div>http://example.com/2026/02/26/LeetCode-3847-Find-the-Score-Difference-in-a-Game（Weekly-Contest-490）/</div>
     </div>
     <div class="license-meta">
       
@@ -391,7 +411,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>發布於</div>
-          <div>2026年2月19日</div>
+          <div>2026年2月26日</div>
         </div>
       
       
@@ -423,9 +443,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2026/02/26/LeetCode-3847-Find-the-Score-Difference-in-a-Game%EF%BC%88Weekly-Contest-490%EF%BC%89/" title="LeetCode-3847. Find the Score Difference in a Game（Weekly Contest 490）">
+                      <a href="/2026/02/26/LeetCode-20-Valid-Parentheses/" title="LeetCode-20. Valid Parentheses">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">LeetCode-3847. Find the Score Difference in a Game（Weekly Contest 490）</span>
+                        <span class="hidden-mobile">LeetCode-20. Valid Parentheses</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -433,8 +453,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2026/02/19/LeetCode-3838-Weighted-Word-Mapping%EF%BC%88Biweekly-Contest-176%EF%BC%89/" title="LeetCode-3838. Weighted Word Mapping（Biweekly Contest 176）">
-                        <span class="hidden-mobile">LeetCode-3838. Weighted Word Mapping（Biweekly Contest 176）</span>
+                      <a href="/2026/02/19/LeetCode-3842-Toggle-Light-Bulbs%EF%BC%88Weekly-Contest-489%EF%BC%89/" title="LeetCode-3842. Toggle Light Bulbs（Weekly Contest 489）">
+                        <span class="hidden-mobile">LeetCode-3842. Toggle Light Bulbs（Weekly Contest 489）</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
