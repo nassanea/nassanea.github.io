@@ -19,25 +19,24 @@
   <meta name="author" content="Jane Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="題目：3848. Check Digitorial Permutation  問題描述digitorial 是指：一個數字的各個位數的「階乘總和(digitSum)」等於他自己 or 他自己的任何位數的排列組合（不能以0開頭）的數字，那他就被稱為 digitorial 例如 145, 541, 451 都是 digitorial ，因為 1! + 4! + 5! &#x3D; 145，而這個 1! + 4">
+    <meta name="description" content="題目：3852. Smallest Pair With Different Frequencies  Intuition用一個頻率陣列 freq 掃過 nums[] 紀錄每個數字出現之頻率再利用 freq 之天然排序特性分別各掃過一次 freq 陣列以找到符合條件之 x 和 yApproach 宣告 freq[] 陣列紀錄每個數字出現的頻率 遍歷 freq[] 陣列，第一個找到 freq[i]">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LeetCode-3848. Check Digitorial Permutation（Weekly Contest 490）">
-<meta property="og:url" content="http://example.com/2026/02/26/LeetCode-3848-Check-Digitorial-Permutation%EF%BC%88Weekly-Contest-490%EF%BC%89/index.html">
+<meta property="og:title" content="LeetCode-3852. Smallest Pair With Different Frequencies（Biweekly Contest 177）">
+<meta property="og:url" content="http://example.com/2026/03/01/LeetCode-3852-Smallest-Pair-With-Different-Frequencies%EF%BC%88Biweekly-Contest-177%EF%BC%89/index.html">
 <meta property="og:site_name" content="筆記記錄">
-<meta property="og:description" content="題目：3848. Check Digitorial Permutation  問題描述digitorial 是指：一個數字的各個位數的「階乘總和(digitSum)」等於他自己 or 他自己的任何位數的排列組合（不能以0開頭）的數字，那他就被稱為 digitorial 例如 145, 541, 451 都是 digitorial ，因為 1! + 4! + 5! &#x3D; 145，而這個 1! + 4">
+<meta property="og:description" content="題目：3852. Smallest Pair With Different Frequencies  Intuition用一個頻率陣列 freq 掃過 nums[] 紀錄每個數字出現之頻率再利用 freq 之天然排序特性分別各掃過一次 freq 陣列以找到符合條件之 x 和 yApproach 宣告 freq[] 陣列紀錄每個數字出現的頻率 遍歷 freq[] 陣列，第一個找到 freq[i]">
 <meta property="og:locale" content="zh_TW">
-<meta property="article:published_time" content="2026-02-26T03:02:43.000Z">
-<meta property="article:modified_time" content="2026-02-26T10:41:27.366Z">
+<meta property="article:published_time" content="2026-03-01T05:55:23.000Z">
+<meta property="article:modified_time" content="2026-03-01T05:56:47.463Z">
 <meta property="article:author" content="Jane Doe">
 <meta property="article:tag" content="leetcode">
-<meta property="article:tag" content="weekly-contest">
-<meta property="article:tag" content="medium">
-<meta property="article:tag" content="Senior">
+<meta property="article:tag" content="easy">
+<meta property="article:tag" content="biweekly-contest">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>LeetCode-3848. Check Digitorial Permutation（Weekly Contest 490） - 筆記記錄</title>
+  <title>LeetCode-3852. Smallest Pair With Different Frequencies（Biweekly Contest 177） - 筆記記錄</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -203,7 +202,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="LeetCode-3848. Check Digitorial Permutation（Weekly Contest 490）"></span>
+            <span id="subtitle" data-typed-text="LeetCode-3852. Smallest Pair With Different Frequencies（Biweekly Contest 177）"></span>
           
         </div>
 
@@ -214,8 +213,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2026-02-26 11:02" pubdate>
-          2026年2月26日 上午
+        <time datetime="2026-03-01 13:55" pubdate>
+          2026年3月1日 下午
         </time>
       </span>
     
@@ -226,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          670 字
+          391 字
         
       </span>
     
@@ -237,7 +236,7 @@
         
         
         
-          6 分鐘
+          4 分鐘
         
       </span>
     
@@ -274,30 +273,34 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">LeetCode-3848. Check Digitorial Permutation（Weekly Contest 490）</h1>
+            <h1 id="seo-header">LeetCode-3852. Smallest Pair With Different Frequencies（Biweekly Contest 177）</h1>
             
             
               <div class="markdown-body">
                 
                 <blockquote>
-<p>題目：<a href="https://leetcode.com/problems/check-digitorial-permutation/description/">3848. Check Digitorial Permutation</a></p>
+<p>題目：<a href="https://leetcode.com/problems/smallest-pair-with-different-frequencies/description/">3852. Smallest Pair With Different Frequencies</a></p>
 </blockquote>
-<h1 id="問題描述"><a href="#問題描述" class="headerlink" title="問題描述"></a>問題描述</h1><p><code>digitorial</code> 是指：一個數字的各個位數的「階乘總和(<code>digitSum</code>)」等於他自己 or 他自己的任何位數的排列組合（不能以0開頭）的數字，那他就被稱為 <code>digitorial</code></p>
-<p>例如 <code>145</code>, <code>541</code>, <code>451</code> 都是 <code>digitorial</code> ，因為 <code>1! + 4! + 5! = 145</code>，而這個 <code>1! + 4! + 5! = 145</code> 的結果可以個別從 <code>145</code>, <code>541</code>, <code>451</code> 身上得出，所以這三個數字都是 <code>digitorial</code></p>
-<p>題目要求：傳入一數字 <code>n</code>，回傳 <code>n</code> 是否是 <code>digitorial</code></p>
-<h1 id="解題思路"><a href="#解題思路" class="headerlink" title="解題思路"></a>解題思路</h1><p>其實可以反過來說，當找到 <code>digitSum</code> 的值本身就是 <code>n</code> 的一種排列組合時，正意味著 <code>n</code><br> 就是 <code>digitorial</code><br> 舉例而言想知道 <code>451</code> 是否為 <code>digitorial</code>，那我們只要計算：</p>
-<ol>
-<li><code>451</code> 的 digitSum  -&gt; digitSum 是 145</li>
-<li><code>451</code> 的每個位數分別是誰、有幾個 -&gt; 分別由一個 1、一個 4、一個 5 所組成<br>這時再看看 <code>digitSum</code> 分別由哪些位數組成？ -&gt; <code>145</code> 也是由「一個 1、一個 4、一個 5」所組成<br>只要「 <code>digitSum</code> 的組成成分」 <code>等於</code> 「 <code>n</code> 的組成成分」就代表 digitSum 是 n 的其中一種排列組合了，那也就代表 n 的其中一種排列組合之 <code>digitSum</code> 會等於該排列組合的值 -&gt; <code>n</code> 是 <code>digitorial</code></li>
+<h1 id="Intuition"><a href="#Intuition" class="headerlink" title="Intuition"></a>Intuition</h1><h2 id="用一個頻率陣列-freq-掃過-nums-紀錄每個數字出現之頻率再利用-freq-之天然排序特性分別各掃過一次-freq-陣列以找到符合條件之-x-和-y"><a href="#用一個頻率陣列-freq-掃過-nums-紀錄每個數字出現之頻率再利用-freq-之天然排序特性分別各掃過一次-freq-陣列以找到符合條件之-x-和-y" class="headerlink" title="用一個頻率陣列 freq 掃過 nums[] 紀錄每個數字出現之頻率再利用 freq 之天然排序特性分別各掃過一次 freq 陣列以找到符合條件之 x 和 y"></a>用一個頻率陣列 <code>freq</code> 掃過 <code>nums[]</code> 紀錄每個數字出現之頻率<br>再利用 <code>freq</code> 之天然排序特性分別各掃過一次 <code>freq</code> 陣列以找到符合條件之 <code>x</code> 和 <code>y</code></h2><h1 id="Approach"><a href="#Approach" class="headerlink" title="Approach"></a>Approach</h1><ol>
+<li>宣告 <code>freq[]</code> 陣列紀錄每個數字出現的頻率</li>
+<li>遍歷 <code>freq[]</code> 陣列，第一個找到 <code>freq[i] !=0</code> 的 <code>i</code> 就是 <code>nums[]</code> 中的最小值 <code>x</code></li>
+<li>從 <code>index</code> 為 <code>x+1</code> 之處開始遍歷 <code>freq[]</code>，找到第一個頻率不為 <code>0</code> 且不等於 <code>x</code> 的頻率的 <code>i</code> 就是 <code>y</code>，這時可以直接回傳 <code>[x, i]</code> 陣列</li>
+<li>如果遍歷完陣列，代表都沒有找到適合的 <code>y</code>，這時回傳 <code>[-1, -1]</code></li>
+<li>針對特殊情況：<code>nums[]</code> 長度等於 <code>1</code>  or <code>nums[]</code> 長度等於 <code>2</code> 時可以直接回傳 <code>[-1, -1]</code></li>
 </ol>
-<hr>
-<ol>
-<li>先計算 <code>n</code> 的 <code>digitSum</code> 的值</li>
-<li>檢查 <code>n</code> 和 <code>digitSUm</code> 的位數組成是否一致</li>
-<li>如果一致，就代表 <code>n</code> 是 <code>digitorial</code><br>可以把計算階乘的邏輯另外寫成一個函數以簡化計算 <code>digitSum</code> 的程式碼</li>
-</ol>
-<p>而檢查組成位數的函數 <code>checkSame</code> ，其內部的檢查邏輯適用一個長度 10 的陣列，存放 0~9 的出現次數（頻率）<br>先對 digitSum 取 10 的餘數紀錄每個數字的出現頻率（<code>++</code>）<br>再對 <code>n</code> 取 10 的餘數，計算每個數字的出現頻率，一旦出現就反向去 <code>--</code>，最後看陣列內若是有不為 0 的值，代表兩者組成成分不一致，回傳 false</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isDigitorialPermutation</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> &#123;<br>        <span class="hljs-comment">// 如果這個數字各個位數的的階乘總和等於他自己 or 他自己的任何位數的排列組合（不能以0開頭），那他被稱為 digitorial</span><br>        <span class="hljs-comment">// 計算 digitSum 和 n 之中各個位數的出現頻率是否一致</span><br>        <span class="hljs-comment">// 也就是看 digitSum 本身是否為 n 的其中一種排列組合</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">number</span> <span class="hljs-operator">=</span> n;<br><br>        <span class="hljs-comment">// 先求出 digitSum</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">digitSum</span> <span class="hljs-operator">=</span><span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span>(number&gt;<span class="hljs-number">0</span>)&#123;<br>            digitSum += factorial(number%<span class="hljs-number">10</span>);<br>            number = number/<span class="hljs-number">10</span>; <span class="hljs-comment">// 先得個位數之階乘   </span><br>        &#125;<br><br>        <span class="hljs-comment">// check digitSum 和 n 個字的數字出現頻率</span><br>        <span class="hljs-keyword">return</span> checkSame(digitSum, n);<br>    &#125;<br>    <span class="hljs-comment">// 階乘函數</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">factorial</span><span class="hljs-params">(<span class="hljs-type">int</span> k)</span>&#123;<br>        <span class="hljs-keyword">if</span>(k==<span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">if</span>(k==<span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">else</span>&#123;<br>            <span class="hljs-keyword">return</span> factorial(k-<span class="hljs-number">1</span>)*k;<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-comment">// check digitSum 和 n 個字的數字出現頻率</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">checkSame</span><span class="hljs-params">(<span class="hljs-type">int</span> fact, <span class="hljs-type">int</span> n)</span>&#123;<br>        <span class="hljs-type">int</span>[] freq = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">10</span>]; <span class="hljs-comment">// 0~9</span><br>        <span class="hljs-keyword">while</span>(fact&gt;<span class="hljs-number">0</span>)&#123;<br>            freq[fact%<span class="hljs-number">10</span>]++;<br>            fact = fact/<span class="hljs-number">10</span>;<br>        &#125;<br>        <span class="hljs-keyword">while</span>(n&gt;<span class="hljs-number">0</span>)&#123;<br>            freq[n%<span class="hljs-number">10</span>]--;<br>            n = n/<span class="hljs-number">10</span>;<br>        &#125;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i : freq)&#123;<br>            <span class="hljs-keyword">if</span>(i!=<span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h1 id="Complexity"><a href="#Complexity" class="headerlink" title="Complexity"></a>Complexity</h1><ul>
+<li>Time complexity:</li>
+</ul>
+<!-- Add your time complexity here, e.g. $$O(n)$$ -->
+
+<ul>
+<li>Space complexity:</li>
+</ul>
+<!-- Add your space complexity here, e.g. $$O(n)$$ -->
+
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight java"><figcaption><span>[]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span>[] minDistinctFreqPair(<span class="hljs-type">int</span>[] nums) &#123;<br>        <span class="hljs-comment">// 用一個長度 101 陣列掃過一次紀錄頻率</span><br>        <span class="hljs-type">int</span>[] freq = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">101</span>];<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>; i&lt;nums.length; i++)&#123;<br>            freq[ nums[i] ]++;<br>        &#125;<br><br>        <span class="hljs-comment">// 特殊情況快速判斷</span><br>        <span class="hljs-comment">// 1. 如果整個 freq 內頻率不為 0 的頻率值相同，回傳 [-1,-1]</span><br>        <span class="hljs-type">int</span>[] noValid = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]&#123;-<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>&#125;;<br><br><br>        <span class="hljs-comment">// 2. nums[] 陣列長度為 1 時</span><br>        <span class="hljs-keyword">if</span>(nums.length == <span class="hljs-number">1</span> || nums.length == <span class="hljs-number">2</span>) <span class="hljs-keyword">return</span> noValid;<br><br>        <span class="hljs-comment">// 其餘情況</span><br>        <span class="hljs-type">int</span> x=<span class="hljs-number">0</span>; <span class="hljs-comment">// 陣列中的最小值</span><br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>; i&lt;freq.length; i++)&#123;<br>            <span class="hljs-keyword">if</span>(freq[i] !=<span class="hljs-number">0</span>)&#123;<br>                x = i; <span class="hljs-comment">// 找到最小值</span><br>                <span class="hljs-keyword">break</span>;<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-comment">// 找到 y</span><br>        <span class="hljs-type">int</span> y=<span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=x+<span class="hljs-number">1</span>; i&lt;freq.length; i++)&#123;<br>            <span class="hljs-keyword">if</span>(freq[i]&gt;<span class="hljs-number">0</span> &amp;&amp; freq[i] != freq[x])&#123; <span class="hljs-comment">// 只要出現頻率不同於 x 且 出現頻率不為 0 </span><br>                <span class="hljs-comment">// 就可以設值，因為 freq 是按照數字大小排</span><br>                <span class="hljs-comment">// y 必定是 大於 x 的最小數字</span><br>                <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]&#123;x, i&#125;;<br>            &#125;<br>            <br>        &#125;<br>        <span class="hljs-keyword">return</span> noValid;<br><br><br>        <br><br><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
                 
               </div>
             
@@ -339,11 +342,9 @@
       
         <a href="/tags/leetcode/" class="print-no-link">#leetcode</a>
       
-        <a href="/tags/weekly-contest/" class="print-no-link">#weekly-contest</a>
+        <a href="/tags/easy/" class="print-no-link">#easy</a>
       
-        <a href="/tags/medium/" class="print-no-link">#medium</a>
-      
-        <a href="/tags/Senior/" class="print-no-link">#Senior</a>
+        <a href="/tags/biweekly-contest/" class="print-no-link">#biweekly-contest</a>
       
     </div>
   
@@ -355,8 +356,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>LeetCode-3848. Check Digitorial Permutation（Weekly Contest 490）</div>
-      <div>http://example.com/2026/02/26/LeetCode-3848-Check-Digitorial-Permutation（Weekly-Contest-490）/</div>
+      <div>LeetCode-3852. Smallest Pair With Different Frequencies（Biweekly Contest 177）</div>
+      <div>http://example.com/2026/03/01/LeetCode-3852-Smallest-Pair-With-Different-Frequencies（Biweekly-Contest-177）/</div>
     </div>
     <div class="license-meta">
       
@@ -368,7 +369,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>發布於</div>
-          <div>2026年2月26日</div>
+          <div>2026年3月1日</div>
         </div>
       
       
@@ -400,18 +401,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2026/03/01/LeetCode-3852-Smallest-Pair-With-Different-Frequencies%EF%BC%88Biweekly-Contest-177%EF%BC%89/" title="LeetCode-3852. Smallest Pair With Different Frequencies（Biweekly Contest 177）">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">LeetCode-3852. Smallest Pair With Different Frequencies（Biweekly Contest 177）</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2026/02/26/LeetCode-20-Valid-Parentheses/" title="LeetCode-20. Valid Parentheses">
-                        <span class="hidden-mobile">LeetCode-20. Valid Parentheses</span>
+                      <a href="/2026/02/26/LeetCode-3848-Check-Digitorial-Permutation%EF%BC%88Weekly-Contest-490%EF%BC%89/" title="LeetCode-3848. Check Digitorial Permutation（Weekly Contest 490）">
+                        <span class="hidden-mobile">LeetCode-3848. Check Digitorial Permutation（Weekly Contest 490）</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

@@ -4,6 +4,37 @@
   
   
   <entry>
+    <title>LeetCode-3852. Smallest Pair With Different Frequencies（Biweekly Contest 177）</title>
+    <link href="/2026/03/01/LeetCode-3852-Smallest-Pair-With-Different-Frequencies%EF%BC%88Biweekly-Contest-177%EF%BC%89/"/>
+    <url>/2026/03/01/LeetCode-3852-Smallest-Pair-With-Different-Frequencies%EF%BC%88Biweekly-Contest-177%EF%BC%89/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p>題目：<a href="https://leetcode.com/problems/smallest-pair-with-different-frequencies/description/">3852. Smallest Pair With Different Frequencies</a></p></blockquote><h1 id="Intuition"><a href="#Intuition" class="headerlink" title="Intuition"></a>Intuition</h1><h2 id="用一個頻率陣列-freq-掃過-nums-紀錄每個數字出現之頻率再利用-freq-之天然排序特性分別各掃過一次-freq-陣列以找到符合條件之-x-和-y"><a href="#用一個頻率陣列-freq-掃過-nums-紀錄每個數字出現之頻率再利用-freq-之天然排序特性分別各掃過一次-freq-陣列以找到符合條件之-x-和-y" class="headerlink" title="用一個頻率陣列 freq 掃過 nums[] 紀錄每個數字出現之頻率再利用 freq 之天然排序特性分別各掃過一次 freq 陣列以找到符合條件之 x 和 y"></a>用一個頻率陣列 <code>freq</code> 掃過 <code>nums[]</code> 紀錄每個數字出現之頻率<br>再利用 <code>freq</code> 之天然排序特性分別各掃過一次 <code>freq</code> 陣列以找到符合條件之 <code>x</code> 和 <code>y</code></h2><h1 id="Approach"><a href="#Approach" class="headerlink" title="Approach"></a>Approach</h1><ol><li>宣告 <code>freq[]</code> 陣列紀錄每個數字出現的頻率</li><li>遍歷 <code>freq[]</code> 陣列，第一個找到 <code>freq[i] !=0</code> 的 <code>i</code> 就是 <code>nums[]</code> 中的最小值 <code>x</code></li><li>從 <code>index</code> 為 <code>x+1</code> 之處開始遍歷 <code>freq[]</code>，找到第一個頻率不為 <code>0</code> 且不等於 <code>x</code> 的頻率的 <code>i</code> 就是 <code>y</code>，這時可以直接回傳 <code>[x, i]</code> 陣列</li><li>如果遍歷完陣列，代表都沒有找到適合的 <code>y</code>，這時回傳 <code>[-1, -1]</code></li><li>針對特殊情況：<code>nums[]</code> 長度等於 <code>1</code>  or <code>nums[]</code> 長度等於 <code>2</code> 時可以直接回傳 <code>[-1, -1]</code></li></ol><h1 id="Complexity"><a href="#Complexity" class="headerlink" title="Complexity"></a>Complexity</h1><ul><li>Time complexity:</li></ul><!-- Add your time complexity here, e.g. $$O(n)$$ --><ul><li>Space complexity:</li></ul><!-- Add your space complexity here, e.g. $$O(n)$$ --><h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight java"><figcaption><span>[]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span>[] minDistinctFreqPair(<span class="hljs-type">int</span>[] nums) &#123;<br>        <span class="hljs-comment">// 用一個長度 101 陣列掃過一次紀錄頻率</span><br>        <span class="hljs-type">int</span>[] freq = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">101</span>];<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>; i&lt;nums.length; i++)&#123;<br>            freq[ nums[i] ]++;<br>        &#125;<br><br>        <span class="hljs-comment">// 特殊情況快速判斷</span><br>        <span class="hljs-comment">// 1. 如果整個 freq 內頻率不為 0 的頻率值相同，回傳 [-1,-1]</span><br>        <span class="hljs-type">int</span>[] noValid = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]&#123;-<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>&#125;;<br><br><br>        <span class="hljs-comment">// 2. nums[] 陣列長度為 1 時</span><br>        <span class="hljs-keyword">if</span>(nums.length == <span class="hljs-number">1</span> || nums.length == <span class="hljs-number">2</span>) <span class="hljs-keyword">return</span> noValid;<br><br>        <span class="hljs-comment">// 其餘情況</span><br>        <span class="hljs-type">int</span> x=<span class="hljs-number">0</span>; <span class="hljs-comment">// 陣列中的最小值</span><br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>; i&lt;freq.length; i++)&#123;<br>            <span class="hljs-keyword">if</span>(freq[i] !=<span class="hljs-number">0</span>)&#123;<br>                x = i; <span class="hljs-comment">// 找到最小值</span><br>                <span class="hljs-keyword">break</span>;<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-comment">// 找到 y</span><br>        <span class="hljs-type">int</span> y=<span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=x+<span class="hljs-number">1</span>; i&lt;freq.length; i++)&#123;<br>            <span class="hljs-keyword">if</span>(freq[i]&gt;<span class="hljs-number">0</span> &amp;&amp; freq[i] != freq[x])&#123; <span class="hljs-comment">// 只要出現頻率不同於 x 且 出現頻率不為 0 </span><br>                <span class="hljs-comment">// 就可以設值，因為 freq 是按照數字大小排</span><br>                <span class="hljs-comment">// y 必定是 大於 x 的最小數字</span><br>                <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]&#123;x, i&#125;;<br>            &#125;<br>            <br>        &#125;<br>        <span class="hljs-keyword">return</span> noValid;<br><br><br>        <br><br><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>Algorithm</category>
+      
+      <category>LeetCode</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>leetcode</tag>
+      
+      <tag>easy</tag>
+      
+      <tag>biweekly-contest</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>LeetCode-3848. Check Digitorial Permutation（Weekly Contest 490）</title>
     <link href="/2026/02/26/LeetCode-3848-Check-Digitorial-Permutation%EF%BC%88Weekly-Contest-490%EF%BC%89/"/>
     <url>/2026/02/26/LeetCode-3848-Check-Digitorial-Permutation%EF%BC%88Weekly-Contest-490%EF%BC%89/</url>
@@ -89,6 +120,8 @@
       <tag>weekly-contest</tag>
       
       <tag>medium</tag>
+      
+      <tag>Simulation</tag>
       
     </tags>
     
