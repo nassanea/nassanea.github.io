@@ -1,281 +1,164 @@
-
-
-<!DOCTYPE html>
-<html lang="zh-TW" data-default-color-scheme=auto>
-
-
-
-<head>
-  <meta charset="UTF-8">
-
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
-  <link rel="icon" href="/img/fluid.png">
-  
-
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  
-  <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="Jane Doe">
-  <meta name="keywords" content="">
-  
-    <meta name="description" content="reference 第 10 章 例外處理（Exception Handling） 【左京淳的JAVA學習筆記】第八章 例外處理 Java筆記 — Exception 與 Error   因為關於例外處理的種類容易搞混，查了很多資料後，寫一篇整理幫助自己理解。 概覽 java 例外的特性 例外處理簡介 語法 受檢例外（Checked Exception）、執行時期例外（Runtime Excep">
+<!DOCTYPE html><html lang="zh-TW" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Java 例外處理 | 筆記記錄</title><meta name="author" content="Jane Doe"><meta name="copyright" content="Jane Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="reference 第 10 章 例外處理（Exception Handling） 【左京淳的JAVA學習筆記】第八章 例外處理 Java筆記 — Exception 與 Error   因為關於例外處理的種類容易搞混，查了很多資料後，寫一篇整理幫助自己理解。 概覽 java 例外的特性 例外處理簡介 語法 受檢例外（Checked Exception）、執行時期例外（Runtime Excep">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java 例外處理">
 <meta property="og:url" content="http://example.com/2026/02/05/Java%20%E4%BE%8B%E5%A4%96%E8%99%95%E7%90%86/index.html">
 <meta property="og:site_name" content="筆記記錄">
 <meta property="og:description" content="reference 第 10 章 例外處理（Exception Handling） 【左京淳的JAVA學習筆記】第八章 例外處理 Java筆記 — Exception 與 Error   因為關於例外處理的種類容易搞混，查了很多資料後，寫一篇整理幫助自己理解。 概覽 java 例外的特性 例外處理簡介 語法 受檢例外（Checked Exception）、執行時期例外（Runtime Excep">
 <meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="http://example.com/avatar.jpg">
 <meta property="article:published_time" content="2026-02-05T08:32:44.000Z">
 <meta property="article:modified_time" content="2026-02-05T08:39:39.242Z">
 <meta property="article:author" content="Jane Doe">
-<meta name="twitter:card" content="summary_large_image">
-  
-  
-  
-  <title>Java 例外處理 - 筆記記錄</title>
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
-
-
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
-
-
-
-<!-- 主题依赖的图标库，不要自行修改 -->
-<!-- Do not modify the link that theme dependent icons -->
-
-<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
-
-
-
-<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
-
-
-<link  rel="stylesheet" href="/css/main.css" />
-
-
-  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
-  
-    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
-  
-
-
-
-
-  <script id="fluid-configs">
-    var Fluid = window.Fluid || {};
-    Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
-
-    if (CONFIG.web_analytics.follow_dnt) {
-      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
-      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/avatar.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Java 例外處理",
+  "url": "http://example.com/2026/02/05/Java%20%E4%BE%8B%E5%A4%96%E8%99%95%E7%90%86/",
+  "image": "http://example.com/avatar.jpg",
+  "datePublished": "2026-02-05T08:32:44.000Z",
+  "dateModified": "2026-02-05T08:39:39.242Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Jane Doe",
+      "url": "http://example.com"
     }
-  </script>
-  <script  src="/js/utils.js" ></script>
-  <script  src="/js/color-schema.js" ></script>
-  
-
-
-  
-<meta name="generator" content="Hexo 7.3.0"></head>
-
-
-<body>
-  
-
-  <header>
-    
-
-<div class="header-inner" style="height: 70vh;">
-  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
-  <div class="container">
-    <a class="navbar-brand" href="/">
-      <strong>nassanea</strong>
-    </a>
-
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <div class="animated-icon"><span></span><span></span><span></span></div>
-    </button>
-
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto text-center">
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/" target="_self">
-                <i class="iconfont icon-home-fill"></i>
-                <span>首頁</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/" target="_self">
-                <i class="iconfont icon-archive-fill"></i>
-                <span>歸檔</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/categories/" target="_self">
-                <i class="iconfont icon-category-fill"></i>
-                <span>分類</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/tags/" target="_self">
-                <i class="iconfont icon-tags-fill"></i>
-                <span>標籤</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/about/" target="_self">
-                <i class="iconfont icon-user-fill"></i>
-                <span>關於</span>
-              </a>
-            </li>
-          
-        
-        
-          <li class="nav-item" id="search-btn">
-            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
-              <i class="iconfont icon-search"></i>
-            </a>
-          </li>
-          
-        
-        
-          <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
-              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
-            </a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-</nav>
-
-  
-
-<div id="banner" class="banner" parallax=true
-     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
-  <div class="full-bg-img">
-    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-      <div class="banner-text text-center fade-in-up">
-        <div class="h2">
-          
-            <span id="subtitle" data-typed-text="Java 例外處理"></span>
-          
-        </div>
-
-        
-          
-  <div class="mt-3">
-    
-    
-      <span class="post-meta">
-        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2026-02-05 16:32" pubdate>
-          2026年2月5日 下午
-        </time>
-      </span>
-    
-  </div>
-
-  <div class="mt-1">
-    
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-chart"></i>
-        
-          3.5k 字
-        
-      </span>
-    
-
-    
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-clock-fill"></i>
-        
-        
-        
-          29 分鐘
-        
-      </span>
-    
-
-    
-    
-  </div>
-
-
-        
-      </div>
-
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2026/02/05/Java%20%E4%BE%8B%E5%A4%96%E8%99%95%E7%90%86/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
       
-    </div>
-  </div>
-</div>
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
 
-</div>
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
 
-  </header>
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
 
-  <main>
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
     
       
-
-<div class="container-fluid nopadding-x">
-  <div class="row nomargin-x">
-    <div class="side-col d-none d-lg-block col-lg-2">
-      
-
-    </div>
-
-    <div class="col-lg-8 nopadding-x-md">
-      <div class="container nopadding-x-md" id="board-ctn">
-        <div id="board">
-          <article class="post-content mx-auto">
-            <h1 id="seo-header">Java 例外處理</h1>
-            
-            
-              <div class="markdown-body">
-                
-                <blockquote>
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '複製成功',
+    error: '複製失敗',
+    noSupport: '瀏覽器不支援'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '剛剛',
+    min: '分鐘前',
+    hour: '小時前',
+    day: '天前',
+    month: '個月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '載入更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Java 例外處理',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">12</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">2</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 歸檔</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 標籤</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分類</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 關於</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">筆記記錄</span></a><a class="nav-page-title" href="/"><span class="site-name">Java 例外處理</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首頁</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首頁</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 歸檔</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 標籤</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分類</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 關於</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">Java 例外處理</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">發表於</span><time class="post-meta-date-created" datetime="2026-02-05T08:32:44.000Z" title="發表於 2026-02-05 16:32:44">2026-02-05</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新於</span><time class="post-meta-date-updated" datetime="2026-02-05T08:39:39.242Z" title="更新於 2026-02-05 16:39:39">2026-02-05</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">瀏覽量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><blockquote>
 <h1 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h1><ul>
 <li><a href="https://caterpillar.gitbooks.io/javase6tutorial/content/c10.html">第 10 章 例外處理（Exception Handling）</a></li>
 <li><a href="https://ithelp.ithome.com.tw/articles/10255635">【左京淳的JAVA學習筆記】第八章 例外處理</a></li>
@@ -326,15 +209,15 @@
 <hr>
 <h1 id="例外處理簡介"><a href="#例外處理簡介" class="headerlink" title="例外處理簡介"></a>例外處理簡介</h1><p>編譯器會幫您檢查一些可能產生例外（Checked exception）的狀況，並要求您注意並處理，而對於「執行時期例外」（Runtime exception），您也可以嘗試捕捉例外並將程式回復至正常狀況，這段話的意思，其實是指 java 的例外可以分成兩種，下面詳述</p>
 <p>如果不用例外處理的功能，那通常會用 if 判斷是來代替例外處理，例如</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 判斷使用者有無傳入參數，只有有傳入參數才可以往下跑</span><br><span class="hljs-keyword">if</span>(arr.length != <span class="hljs-number">0</span>)&#123;<br>	<span class="hljs-comment">// 正常要執行的程式碼...</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 判斷使用者有無傳入參數，只有有傳入參數才可以往下跑</span></span><br><span class="line"><span class="keyword">if</span>(arr.length != <span class="number">0</span>)&#123;</span><br><span class="line">	<span class="comment">// 正常要執行的程式碼...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>但這個通常會造成處理錯誤的邏輯與處理業務的邏輯混在一起<br>所以最好還是做例外處理<br>有些預期中可能發生的例外，編譯器會提醒您先行處理，對於一些程式運行時所發生的執行時期例外，您有機會捕捉這些例外，並嘗試將程式回復至正常運作狀態</p>
 <h1 id="語法"><a href="#語法" class="headerlink" title="語法"></a>語法</h1><p>java 中的例外處理由三個關鍵字組合而成（另外還有一個 throw 之後會提，他算是負責向外、向上拋出錯誤的）</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">try</span>&#123;<br>	<span class="hljs-comment">// 可能發生錯誤的程式邏輯</span><br>&#125;<br><span class="hljs-keyword">catch</span>(例外型態 例外名稱)&#123;<br>	<span class="hljs-comment">// 例外發生時的例外處理</span><br>&#125;<br><span class="hljs-keyword">finally</span>&#123;<br>	<span class="hljs-comment">// 一定會處理的區域</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">	<span class="comment">// 可能發生錯誤的程式邏輯</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span>(例外型態 例外名稱)&#123;</span><br><span class="line">	<span class="comment">// 例外發生時的例外處理</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">finally</span>&#123;</span><br><span class="line">	<span class="comment">// 一定會處理的區域</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>try：一個 “try” 語法所包括的區塊，必須有對應的 “catch” 區塊或是 “finally” 區塊，”try” 區塊可以搭配多個 “catch” 區塊</li>
 <li>catch：如果有設定 “catch” 區塊，則 “finally” 區塊可有可無，如果沒有定義 “catch” 區塊，則一定要有 “finally” 區塊</li>
 </ul>
-<h2 id="範例：檢查函數是否有被傳入參數"><a href="#範例：檢查函數是否有被傳入參數" class="headerlink" title="範例：檢查函數是否有被傳入參數"></a>範例：檢查函數是否有被傳入參數</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CheckArgsDemo</span>&#123;<br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">arrLen</span><span class="hljs-params">(<span class="hljs-type">int</span>[] Arr)</span>&#123;<br>		<span class="hljs-keyword">try</span>&#123;<br>			<span class="hljs-comment">// 如果沒有傳入參數，就會無法印出陣列的長度</span><br>			System.out.println(Arr.length);<br>		&#125;<br>		<span class="hljs-keyword">catch</span>(Exception e)&#123;<br>			System.out.println(<span class="hljs-string">&quot;沒有傳入陣列，無法印出陣列長度&quot;</span>);<br>		&#125;<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="範例：檢查函數是否有被傳入參數"><a href="#範例：檢查函數是否有被傳入參數" class="headerlink" title="範例：檢查函數是否有被傳入參數"></a>範例：檢查函數是否有被傳入參數</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CheckArgsDemo</span>&#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">arrLen</span><span class="params">(<span class="type">int</span>[] Arr)</span>&#123;</span><br><span class="line">		<span class="keyword">try</span>&#123;</span><br><span class="line">			<span class="comment">// 如果沒有傳入參數，就會無法印出陣列的長度</span></span><br><span class="line">			System.out.println(Arr.length);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;沒有傳入陣列，無法印出陣列長度&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
 <h1 id="受檢例外（Checked-Exception）、執行時期例外（Runtime-Exception）"><a href="#受檢例外（Checked-Exception）、執行時期例外（Runtime-Exception）" class="headerlink" title="受檢例外（Checked Exception）、執行時期例外（Runtime Exception）"></a>受檢例外（Checked Exception）、執行時期例外（Runtime Exception）</h1><p>剛剛提到 java 的例外物件分成兩種，就是這兩大類</p>
@@ -358,7 +241,7 @@
 <li>FileNotFoundException：找不到檔案</li>
 </ul>
 <p>對於 Checked Exception，必須使用 <code>throws</code> 宣告或 <code>try-catch</code> 處理：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.io.*;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">FileReader</span> &#123;<br>    <span class="hljs-comment">// 方法1：使用 throws 宣告</span><br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">readFile</span><span class="hljs-params">(String path)</span> <span class="hljs-keyword">throws</span> IOException &#123;<br>        <span class="hljs-type">BufferedReader</span> <span class="hljs-variable">reader</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">BufferedReader</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">java</span>.io.FileReader(path));<br>        <span class="hljs-keyword">return</span> reader.readLine();<br>    &#125;<br><br>    <span class="hljs-comment">// 方法2：使用 try-catch 處理</span><br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">readFileSafe</span><span class="hljs-params">(String path)</span> &#123;<br>        <span class="hljs-keyword">try</span> &#123;<br>            <span class="hljs-type">BufferedReader</span> <span class="hljs-variable">reader</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">BufferedReader</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">java</span>.io.FileReader(path));<br>            <span class="hljs-keyword">return</span> reader.readLine();<br>        &#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">FileReader</span> &#123;</span><br><span class="line">    <span class="comment">// 方法1：使用 throws 宣告</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">readFile</span><span class="params">(String path)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="type">BufferedReader</span> <span class="variable">reader</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedReader</span>(<span class="keyword">new</span> <span class="title class_">java</span>.io.FileReader(path));</span><br><span class="line">        <span class="keyword">return</span> reader.readLine();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 方法2：使用 try-catch 處理</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">readFileSafe</span><span class="params">(String path)</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="type">BufferedReader</span> <span class="variable">reader</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedReader</span>(<span class="keyword">new</span> <span class="title class_">java</span>.io.FileReader(path));</span><br><span class="line">            <span class="keyword">return</span> reader.readLine();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="執行時期例外（Runtime-Exception）"><a href="#執行時期例外（Runtime-Exception）" class="headerlink" title="執行時期例外（Runtime Exception）"></a>執行時期例外（Runtime Exception）</h2><p>這就是非受檢例外，通常代表 <strong>「程式設計師寫出的邏輯漏洞」</strong>（也就是 Bug）。Java 認為這些錯誤應該透過 <strong>「修正程式碼」</strong> 來避免，而不是用 <code>try-catch</code> 來掩蓋<br>所以編譯器不會強制程式撰寫者去預先處理這些執行期例外，但若是想要預先處理也可以。<br>常見的應用場景是陣列存取、物件操作、數學運算<br>常見的執行期例外有：</p>
 <ul>
@@ -387,7 +270,7 @@
 <li>用途：宣告此方法可能拋出的例外</li>
 <li>語法：</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">f1</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> 例外型態&#123;<br>	<span class="hljs-comment">// 方法內容</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">f1</span><span class="params">()</span> <span class="keyword">throws</span> 例外型態&#123;</span><br><span class="line">	<span class="comment">// 方法內容</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <blockquote>
 <p>對於有在簽名聲明 throws 例外型態的方法，在呼叫這種方法時，呼叫者需要選擇處理（try-catch）或繼續往外丟（throws））<br>當方法上使用 “throws” 宣告丟出例外時，意味著呼叫該方法的呼叫者必須處理這些例外</p>
@@ -448,15 +331,15 @@
 <li><code>java.io.*</code> 提供的FileReader類的建構式，發生例外時會throws FileNotFoundException。<br>  這個例外不屬於RuntimeException的子類，所以”必須”指定例外處理方法。  </li>
 <li><code>java.lang.*</code> 包提供的 Integer 類的 parseInt() 方法出錯時會throws NumberFormatException<br>  這個例外屬於 RuntimeException 的子類，所以不一定要指定例外處理方法。</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.io.*;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Sample</span> &#123;<br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>    <span class="hljs-comment">//不一定要處理的例外</span><br>    <span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> Integer.parseInt(<span class="hljs-string">&quot;10&quot;</span>);<br>    <br>    <span class="hljs-comment">//一定要處理的例外</span><br>    <span class="hljs-type">FileReader</span> <span class="hljs-variable">r</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FileReader</span>(<span class="hljs-string">&quot;Test.txt&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Sample</span> &#123;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="comment">//不一定要處理的例外</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> Integer.parseInt(<span class="string">&quot;10&quot;</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//一定要處理的例外</span></span><br><span class="line">    <span class="type">FileReader</span> <span class="variable">r</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileReader</span>(<span class="string">&quot;Test.txt&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>因為 FileReader 沒有針對她處理例外，所以在編譯階段就出現錯誤：</p>
-<figure class="highlight pony"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs pony">ex1.java:<span class="hljs-number">9</span>: <span class="hljs-keyword">error</span>: unreported exception <span class="hljs-type">FileNotFoundException</span>; must <span class="hljs-keyword">be</span> caught <span class="hljs-keyword">or</span> declared to <span class="hljs-keyword">be</span> thrown<br>        <span class="hljs-type">FileReader</span> r = <span class="hljs-keyword">new</span> <span class="hljs-type">FileReader</span>(<span class="hljs-string">&quot;Test.txt&quot;</span>);<br>                       ^<br><span class="hljs-number">1</span> <span class="hljs-keyword">error</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ex1.java:9: error: unreported exception FileNotFoundException; must be caught or declared to be thrown</span><br><span class="line">        FileReader r = new FileReader(&quot;Test.txt&quot;);</span><br><span class="line">                       ^</span><br><span class="line">1 error</span><br></pre></td></tr></table></figure>
 <h2 id="throw"><a href="#throw" class="headerlink" title="throw"></a>throw</h2><ul>
 <li>位置：寫在方法內部，<code>&#123;&#125;</code> 裡面</li>
 <li>用途：實際去拋出例外</li>
 <li>語法：</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">f1</span><span class="hljs-params">()</span>&#123;<br>	<span class="hljs-comment">// 方法內容</span><br>	<span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> 例外型態(<span class="hljs-string">&quot;錯誤訊息&quot;</span>);<br>	<span class="hljs-comment">// ...</span><br>	<span class="hljs-comment">// 假設例外發生，那這後面的程式碼都不會被執行</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">f1</span><span class="params">()</span>&#123;</span><br><span class="line">	<span class="comment">// 方法內容</span></span><br><span class="line">	<span class="keyword">throw</span> <span class="keyword">new</span> 例外型態(<span class="string">&quot;錯誤訊息&quot;</span>);</span><br><span class="line">	<span class="comment">// ...</span></span><br><span class="line">	<span class="comment">// 假設例外發生，那這後面的程式碼都不會被執行</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>呼叫這個 <code>f1</code> 的呼叫者也必須要處理這個例外（<code>try-catch</code> or <code>throws</code>）<br>適用於「我們想要自己定義什麼值是正常、什麼值是異常值」的時候，而非遵從 Java 原先的設定<br>就可以用 throw 手動丟出例外</li>
 </ul>
@@ -481,7 +364,7 @@
 </tr>
 </tbody></table>
 <p>範例：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 第一種：不需 throw，只要寫 throws</span><br><span class="hljs-keyword">import</span> java.io.*;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">PassiveReader</span> &#123;<br><br>    <span class="hljs-comment">// 這裡只需要寫 throws (宣告)，不用寫 throw (動作)</span><br>    <span class="hljs-comment">// 因為 FileReader 內部已經寫好 throw 了</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">readStandardFile</span><span class="hljs-params">(String path)</span> <span class="hljs-keyword">throws</span> FileNotFoundException &#123;<br>        <br>        <span class="hljs-comment">// 這一行執行時，如果 path 指向的檔案不存在</span><br>        <span class="hljs-comment">// Java 底層會自動 throw new FileNotFoundException()</span><br>        <span class="hljs-type">FileReader</span> <span class="hljs-variable">fr</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FileReader</span>(path); <br>        <br>        System.out.println(<span class="hljs-string">&quot;檔案開啟成功&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第一種：不需 throw，只要寫 throws</span></span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">PassiveReader</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 這裡只需要寫 throws (宣告)，不用寫 throw (動作)</span></span><br><span class="line">    <span class="comment">// 因為 FileReader 內部已經寫好 throw 了</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">readStandardFile</span><span class="params">(String path)</span> <span class="keyword">throws</span> FileNotFoundException &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 這一行執行時，如果 path 指向的檔案不存在</span></span><br><span class="line">        <span class="comment">// Java 底層會自動 throw new FileNotFoundException()</span></span><br><span class="line">        <span class="type">FileReader</span> <span class="variable">fr</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileReader</span>(path); </span><br><span class="line">        </span><br><span class="line">        System.out.println(<span class="string">&quot;檔案開啟成功&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>這時因為 <code>PassiveReader </code>是把 <code>FileNotFoundException</code> 這個受檢例外純粹往上一層呼叫 <code>PassiveReader</code> 這個方法的人丟過去，假設是由 <code>main</code> 呼叫 <code>PassiveReader</code> ，那 <code>main</code> 有兩種選擇去處理這個被丟上來的例外：<ol>
 <li>直接在 <code>main</code> 裡面寫 <code>try-catch</code></li>
@@ -489,14 +372,14 @@
 </ol>
 </li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 第二種：throw, throws 都要寫</span><br><span class="hljs-keyword">import</span> java.io.*;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">StrictReader</span> &#123;<br><br>    <span class="hljs-comment">// 這裡還是要寫 throws (宣告)，因為你等一下要丟炸彈了</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">readSecureFile</span><span class="hljs-params">(String path)</span> <span class="hljs-keyword">throws</span> FileNotFoundException &#123;<br>        <br>        <span class="hljs-comment">// 【你的自訂邏輯】</span><br>        <span class="hljs-comment">// 假設我們規定：絕對不允許讀取 &quot;config.xml&quot; 這種敏感檔案</span><br>        <span class="hljs-comment">// 就算硬碟裡真的有這個檔案，我們也要騙呼叫者說「找不到」</span><br>        <span class="hljs-keyword">if</span> (path.equals(<span class="hljs-string">&quot;config.xml&quot;</span>)) &#123;<br>            <br>            <span class="hljs-comment">// 這裡必須寫 throw！</span><br>            <span class="hljs-comment">// 因為 Java 不知道你想隱藏這個檔案，你必須主動丟出炸彈</span><br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FileNotFoundException</span>(<span class="hljs-string">&quot;權限不足，假裝找不到此檔案: &quot;</span> + path);<br>        &#125;<br><br>        <span class="hljs-comment">// 如果不是敏感檔案，才真的去讀 (這裡如果讀不到，FileReader 也會幫你丟)</span><br>        <span class="hljs-type">FileReader</span> <span class="hljs-variable">fr</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FileReader</span>(path);<br>        System.out.println(<span class="hljs-string">&quot;檔案開啟成功&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第二種：throw, throws 都要寫</span></span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">StrictReader</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 這裡還是要寫 throws (宣告)，因為你等一下要丟炸彈了</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">readSecureFile</span><span class="params">(String path)</span> <span class="keyword">throws</span> FileNotFoundException &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 【你的自訂邏輯】</span></span><br><span class="line">        <span class="comment">// 假設我們規定：絕對不允許讀取 &quot;config.xml&quot; 這種敏感檔案</span></span><br><span class="line">        <span class="comment">// 就算硬碟裡真的有這個檔案，我們也要騙呼叫者說「找不到」</span></span><br><span class="line">        <span class="keyword">if</span> (path.equals(<span class="string">&quot;config.xml&quot;</span>)) &#123;</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 這裡必須寫 throw！</span></span><br><span class="line">            <span class="comment">// 因為 Java 不知道你想隱藏這個檔案，你必須主動丟出炸彈</span></span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">FileNotFoundException</span>(<span class="string">&quot;權限不足，假裝找不到此檔案: &quot;</span> + path);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 如果不是敏感檔案，才真的去讀 (這裡如果讀不到，FileReader 也會幫你丟)</span></span><br><span class="line">        <span class="type">FileReader</span> <span class="variable">fr</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileReader</span>(path);</span><br><span class="line">        System.out.println(<span class="string">&quot;檔案開啟成功&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
 <h1 id="關於自訂例外-Custom-Exception"><a href="#關於自訂例外-Custom-Exception" class="headerlink" title="關於自訂例外 (Custom Exception)"></a>關於自訂例外 (Custom Exception)</h1><blockquote>
 <p>自訂例外其實只是「自訂名稱例外」，因為自訂例外時必定讓這個自訂例外 class 繼承某個例外父類別</p>
 </blockquote>
 <p>例如：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 繼承自一個受檢例外，那 myException 也是受檢例外</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">myException</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">IOException</span>&#123;<br>	<span class="hljs-comment">// ...</span><br>&#125;<br><br><span class="hljs-comment">// 繼承自父類別是 RuntimeException 的執行期例外 IllegalArgumentException，所以 myE 是一個執行期例外</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">myE</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">IllegalArgumentException</span>&#123;<br>	<span class="hljs-comment">// ...</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 繼承自一個受檢例外，那 myException 也是受檢例外</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">myException</span> <span class="keyword">extends</span> <span class="title class_">IOException</span>&#123;</span><br><span class="line">	<span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 繼承自父類別是 RuntimeException 的執行期例外 IllegalArgumentException，所以 myE 是一個執行期例外</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">myE</span> <span class="keyword">extends</span> <span class="title class_">IllegalArgumentException</span>&#123;</span><br><span class="line">	<span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="自訂例外是否被編譯器視為需要被處理？"><a href="#自訂例外是否被編譯器視為需要被處理？" class="headerlink" title="自訂例外是否被編譯器視為需要被處理？"></a>自訂例外是否被編譯器視為需要被處理？</h2><p>自訂例外的行為，完全取決於你讓它<strong>繼承 (extends)</strong> 了哪一個類別：</p>
 <ol>
 <li><strong>繼承 <code>Exception</code></strong> → 它就變成 <strong>受檢例外</strong>。<ul>
@@ -510,387 +393,4 @@
 </ul>
 </li>
 </ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.*;<br><span class="hljs-keyword">import</span> java.io.*;<br><br><span class="hljs-comment">//Write your code here</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Calculator</span>&#123;<br>    <span class="hljs-type">int</span> <span class="hljs-title function_">power</span><span class="hljs-params">(<span class="hljs-type">int</span> n, <span class="hljs-type">int</span> p)</span> <span class="hljs-keyword">throws</span> Exception&#123;<br>        <span class="hljs-keyword">if</span>(n&lt;<span class="hljs-number">0</span> || p&lt;<span class="hljs-number">0</span>)&#123;<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Exception</span>(<span class="hljs-string">&quot;n and p should be non-negative&quot;</span>);<br>        &#125;<br>        <span class="hljs-keyword">return</span> (<span class="hljs-type">int</span>)Math.pow(n,p);<br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span>&#123;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>    <br>        <span class="hljs-type">Scanner</span> <span class="hljs-variable">in</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Scanner</span>(System.in);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">t</span> <span class="hljs-operator">=</span> in.nextInt();<br>        <span class="hljs-keyword">while</span> (t-- &gt; <span class="hljs-number">0</span>) &#123;<br>        <br>            <span class="hljs-type">int</span> <span class="hljs-variable">n</span> <span class="hljs-operator">=</span> in.nextInt();<br>            <span class="hljs-type">int</span> <span class="hljs-variable">p</span> <span class="hljs-operator">=</span> in.nextInt();<br>            <span class="hljs-type">Calculator</span> <span class="hljs-variable">myCalculator</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Calculator</span>();<br>            <span class="hljs-keyword">try</span> &#123;<br>                <span class="hljs-type">int</span> <span class="hljs-variable">ans</span> <span class="hljs-operator">=</span> myCalculator.power(n, p);<br>                System.out.println(ans);<br>            &#125;<br>            <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>                System.out.println(e.getMessage());<br>            &#125;<br>        &#125;<br>        in.close();<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
-                
-              </div>
-            
-            <hr/>
-            <div>
-              <div class="post-metas my-3">
-  
-  
-</div>
-
-
-              
-  
-
-  <div class="license-box my-3">
-    <div class="license-title">
-      <div>Java 例外處理</div>
-      <div>http://example.com/2026/02/05/Java 例外處理/</div>
-    </div>
-    <div class="license-meta">
-      
-        <div class="license-meta-item">
-          <div>作者</div>
-          <div>Jane Doe</div>
-        </div>
-      
-      
-        <div class="license-meta-item license-meta-date">
-          <div>發布於</div>
-          <div>2026年2月5日</div>
-        </div>
-      
-      
-      
-        <div class="license-meta-item">
-          <div>許可協議</div>
-          <div>
-            
-              
-              
-                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
-                    <i class="iconfont icon-cc-by"></i>
-                  </span>
-                </a>
-              
-            
-          </div>
-        </div>
-      
-    </div>
-    <div class="license-icon iconfont"></div>
-  </div>
-
-
-
-              
-                <div class="post-prevnext my-3">
-                  <article class="post-prev col-6">
-                    
-                    
-                      <a href="/2026/02/06/EXCEL%E9%9B%99%E5%9B%A0%E5%AD%90%E8%AE%8A%E7%95%B0%E6%95%B8%E5%88%86%E6%9E%90-%E7%84%A1%E4%BA%A4%E4%BA%92/" title="EXCEL雙因子變異數分析(無交互&amp;有交互)">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">EXCEL雙因子變異數分析(無交互&amp;有交互)</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
-                  </article>
-                  <article class="post-next col-6">
-                    
-                    
-                  </article>
-                </div>
-              
-            </div>
-
-            
-          </article>
-        </div>
-      </div>
-    </div>
-
-    <div class="side-col d-none d-lg-block col-lg-2">
-      
-  <aside class="sidebar" style="margin-left: -1rem">
-    <div id="toc">
-  <p class="toc-header">
-    <i class="iconfont icon-list"></i>
-    <span>目錄</span>
-  </p>
-  <div class="toc-body" id="toc-body"></div>
-</div>
-
-
-
-  </aside>
-
-
-    </div>
-  </div>
-</div>
-
-
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-  
-  
-
-
-
-
-
-
-
-
-
-    
-
-    
-      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
-        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-      </a>
-    
-
-    
-      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜尋</h4>
-        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body mx-3">
-        <div class="md-form mb-5">
-          <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">關鍵字</label>
-        </div>
-        <div class="list-group" id="local-search-result"></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-    
-
-    
-  </main>
-
-  <footer>
-    <div class="footer-inner">
-  
-    <div class="footer-content">
-       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
-    </div>
-  
-  
-  
-</div>
-
-  </footer>
-
-  <!-- Scripts -->
-  
-  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
-
-  <script>
-    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
-    NProgress.start()
-    window.addEventListener('load', function() {
-      NProgress.done();
-    })
-  </script>
-
-
-<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
-<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/js/events.js" ></script>
-<script  src="/js/plugins.js" ></script>
-
-
-  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
-  <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var subtitle = document.getElementById('subtitle');
-      if (!subtitle || !typing) {
-        return;
-      }
-      var text = subtitle.getAttribute('data-typed-text');
-      
-        typing(text);
-      
-    })(window, document);
-  </script>
-
-
-
-
-  
-    <script  src="/js/img-lazyload.js" ></script>
-  
-
-
-
-
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
-    var toc = jQuery('#toc');
-    if (toc.length === 0 || !window.tocbot) { return; }
-    var boardCtn = jQuery('#board-ctn');
-    var boardTop = boardCtn.offset().top;
-
-    window.tocbot.init(Object.assign({
-      tocSelector     : '#toc-body',
-      contentSelector : '.markdown-body',
-      linkClass       : 'tocbot-link',
-      activeLinkClass : 'tocbot-active-link',
-      listClass       : 'tocbot-list',
-      isCollapsedClass: 'tocbot-is-collapsed',
-      collapsibleClass: 'tocbot-is-collapsible',
-      scrollSmooth    : true,
-      includeTitleTags: true,
-      headingsOffset  : -boardTop,
-    }, CONFIG.toc));
-    if (toc.find('.toc-list-item').length > 0) {
-      toc.css('visibility', 'visible');
-    }
-
-    Fluid.events.registerRefreshCallback(function() {
-      if ('tocbot' in window) {
-        tocbot.refresh();
-        var toc = jQuery('#toc');
-        if (toc.length === 0 || !tocbot) {
-          return;
-        }
-        if (toc.find('.toc-list-item').length > 0) {
-          toc.css('visibility', 'visible');
-        }
-      }
-    });
-  });
-</script>
-
-
-  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
-
-  <script>Fluid.plugins.codeWidget();</script>
-
-
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
-    window.anchors.options = {
-      placement: CONFIG.anchorjs.placement,
-      visible  : CONFIG.anchorjs.visible
-    };
-    if (CONFIG.anchorjs.icon) {
-      window.anchors.options.icon = CONFIG.anchorjs.icon;
-    }
-    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
-    var res = [];
-    for (var item of el) {
-      res.push('.markdown-body > ' + item.trim());
-    }
-    if (CONFIG.anchorjs.placement === 'left') {
-      window.anchors.options.class = 'anchorjs-link-left';
-    }
-    window.anchors.add(res.join(', '));
-
-    Fluid.events.registerRefreshCallback(function() {
-      if ('anchors' in window) {
-        anchors.removeAll();
-        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
-        var res = [];
-        for (var item of el) {
-          res.push('.markdown-body > ' + item.trim());
-        }
-        if (CONFIG.anchorjs.placement === 'left') {
-          anchors.options.class = 'anchorjs-link-left';
-        }
-        anchors.add(res.join(', '));
-      }
-    });
-  });
-</script>
-
-
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
-    Fluid.plugins.fancyBox();
-  });
-</script>
-
-
-  <script>Fluid.plugins.imageCaption();</script>
-
-  
-      <script>
-        if (!window.MathJax) {
-          window.MathJax = {
-            tex    : {
-              inlineMath: { '[+]': [['$', '$']] }
-            },
-            loader : {
-              load: ['ui/lazy']
-            },
-            options: {
-              renderActions: {
-                insertedScript: [200, () => {
-                  document.querySelectorAll('mjx-container').forEach(node => {
-                    let target = node.parentNode;
-                    if (target.nodeName.toLowerCase() === 'li') {
-                      target.parentNode.classList.add('has-jax');
-                    }
-                  });
-                }, '', false]
-              }
-            }
-          };
-        } else {
-          MathJax.startup.document.state(0);
-          MathJax.texReset();
-          MathJax.typeset();
-          MathJax.typesetPromise();
-        }
-
-        Fluid.events.registerRefreshCallback(function() {
-          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
-            MathJax.startup.document.state(0);
-            MathJax.texReset();
-            MathJax.typeset();
-            MathJax.typesetPromise();
-          }
-        });
-      </script>
-    
-
-  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
-
-  <script  src="/js/local-search.js" ></script>
-
-
-
-
-
-<!-- 主题的启动项，将它保持在最底部 -->
-<!-- the boot of the theme, keep it at the bottom -->
-<script  src="/js/boot.js" ></script>
-
-
-  
-
-  <noscript>
-    <div class="noscript-warning">博客在允許 JavaScript 運行的環境下瀏覽效果更佳</div>
-  </noscript>
-</body>
-</html>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"></span><br><span class="line"><span class="comment">//Write your code here</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Calculator</span>&#123;</span><br><span class="line">    <span class="type">int</span> <span class="title function_">power</span><span class="params">(<span class="type">int</span> n, <span class="type">int</span> p)</span> <span class="keyword">throws</span> Exception&#123;</span><br><span class="line">        <span class="keyword">if</span>(n&lt;<span class="number">0</span> || p&lt;<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Exception</span>(<span class="string">&quot;n and p should be non-negative&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> (<span class="type">int</span>)Math.pow(n,p);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    </span><br><span class="line">        <span class="type">Scanner</span> <span class="variable">in</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line">        <span class="type">int</span> <span class="variable">t</span> <span class="operator">=</span> in.nextInt();</span><br><span class="line">        <span class="keyword">while</span> (t-- &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        </span><br><span class="line">            <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> in.nextInt();</span><br><span class="line">            <span class="type">int</span> <span class="variable">p</span> <span class="operator">=</span> in.nextInt();</span><br><span class="line">            <span class="type">Calculator</span> <span class="variable">myCalculator</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Calculator</span>();</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="type">int</span> <span class="variable">ans</span> <span class="operator">=</span> myCalculator.power(n, p);</span><br><span class="line">                System.out.println(ans);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                System.out.println(e.getMessage());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        in.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Jane Doe</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章連結: </span><span class="post-copyright-info"><a href="http://example.com/2026/02/05/Java%20%E4%BE%8B%E5%A4%96%E8%99%95%E7%90%86/">http://example.com/2026/02/05/Java%20%E4%BE%8B%E5%A4%96%E8%99%95%E7%90%86/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版權聲明: </span><span class="post-copyright-info">本部落格所有文章除特別聲明外，均採用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 授權協議。轉載請註明來源 <a href="http://example.com" target="_blank">筆記記錄</a>！</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/avatar.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2026/02/06/EXCEL%E9%9B%99%E5%9B%A0%E5%AD%90%E8%AE%8A%E7%95%B0%E6%95%B8%E5%88%86%E6%9E%90-%E7%84%A1%E4%BA%A4%E4%BA%92/" title="EXCEL雙因子變異數分析(無交互&amp;有交互)"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">EXCEL雙因子變異數分析(無交互&有交互)</div></div><div class="info-2"><div class="info-item-1">參考資料 EXCEL雙因子變異數分析(無交互) 雙因子變異數分析例題  無交互1. 輸入資資料後，點擊 資料分析，選取 雙因子變異數分析：無重複試驗無重複試驗是指每一種因子A和因子B的組合之樣本 n&#x3D;1 的情況，這種試驗只能做「無交互作用的雙因子變異數分析」 2. 連同標題的範圍都要一起輸入 3. 按下確定後可確認雙因子變異數分析之結果 第一張表格為敘述統計；第二張為ANOVA   列：B -&gt; SSB 欄：A -&gt; SSA  比較統計軟體通常直接用 p-value 判斷顯著&#x2F;不顯著  p-value &lt; $\alpha$：落入拒絕域，顯著 反之。  有交互想要研究不同教育程度對於男女薪資的影響  應變數： 因子A：教育程度 因子B：性別每一組合（AxB組合）的資料都各有三筆，這是重複試驗ie. 男x國中 的資料有三筆    1. 同樣輸入資料，點擊 資料分析，選取 雙因子變異數分析：重複試驗  2. 連同標題的範圍都要一起輸入 3. 手動輸入 每一樣本的列數 -&gt; 3 得到結果：前三張都是敘述統計判讀 ANOVA 表之順序：  要先看...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Jane Doe</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">12</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">2</div></a></div><a id="card-info-btn" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目錄</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#reference"><span class="toc-number">1.</span> <span class="toc-text">reference</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A6%82%E8%A6%BD"><span class="toc-number">2.</span> <span class="toc-text">概覽</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#java-%E4%BE%8B%E5%A4%96%E7%9A%84%E7%89%B9%E6%80%A7"><span class="toc-number">3.</span> <span class="toc-text">java 例外的特性</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BE%8B%E5%A4%96%E8%99%95%E7%90%86%E7%B0%A1%E4%BB%8B"><span class="toc-number">4.</span> <span class="toc-text">例外處理簡介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AA%9E%E6%B3%95"><span class="toc-number">5.</span> <span class="toc-text">語法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AF%84%E4%BE%8B%EF%BC%9A%E6%AA%A2%E6%9F%A5%E5%87%BD%E6%95%B8%E6%98%AF%E5%90%A6%E6%9C%89%E8%A2%AB%E5%82%B3%E5%85%A5%E5%8F%83%E6%95%B8"><span class="toc-number">5.1.</span> <span class="toc-text">範例：檢查函數是否有被傳入參數</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%97%E6%AA%A2%E4%BE%8B%E5%A4%96%EF%BC%88Checked-Exception%EF%BC%89%E3%80%81%E5%9F%B7%E8%A1%8C%E6%99%82%E6%9C%9F%E4%BE%8B%E5%A4%96%EF%BC%88Runtime-Exception%EF%BC%89"><span class="toc-number">6.</span> <span class="toc-text">受檢例外（Checked Exception）、執行時期例外（Runtime Exception）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%97%E6%AA%A2%E4%BE%8B%E5%A4%96%EF%BC%88Checked-Exception%EF%BC%89"><span class="toc-number">6.1.</span> <span class="toc-text">受檢例外（Checked Exception）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%B7%E8%A1%8C%E6%99%82%E6%9C%9F%E4%BE%8B%E5%A4%96%EF%BC%88Runtime-Exception%EF%BC%89"><span class="toc-number">6.2.</span> <span class="toc-text">執行時期例外（Runtime Exception）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#throws-throw"><span class="toc-number">7.</span> <span class="toc-text">throws &amp; throw</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#throws"><span class="toc-number">7.1.</span> <span class="toc-text">throws</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#throw"><span class="toc-number">7.2.</span> <span class="toc-text">throw</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%95%E6%99%82%E5%8F%AA%E7%94%A8-throws%EF%BC%9B%E4%BD%95%E6%99%82-throws-throw-%E9%83%BD%E8%A6%81%E7%94%A8%EF%BC%9F"><span class="toc-number">7.3.</span> <span class="toc-text">何時只用 throws；何時 throws, throw 都要用？</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%97%9C%E6%96%BC%E8%87%AA%E8%A8%82%E4%BE%8B%E5%A4%96-Custom-Exception"><span class="toc-number">8.</span> <span class="toc-text">關於自訂例外 (Custom Exception)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E8%A8%82%E4%BE%8B%E5%A4%96%E6%98%AF%E5%90%A6%E8%A2%AB%E7%B7%A8%E8%AD%AF%E5%99%A8%E8%A6%96%E7%82%BA%E9%9C%80%E8%A6%81%E8%A2%AB%E8%99%95%E7%90%86%EF%BC%9F"><span class="toc-number">8.1.</span> <span class="toc-text">自訂例外是否被編譯器視為需要被處理？</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/03/01/LeetCode-3852-Smallest-Pair-With-Different-Frequencies%EF%BC%88Biweekly-Contest-177%EF%BC%89/" title="LeetCode-3852. Smallest Pair With Different Frequencies（Biweekly Contest 177）">LeetCode-3852. Smallest Pair With Different Frequencies（Biweekly Contest 177）</a><time datetime="2026-03-01T05:55:23.000Z" title="發表於 2026-03-01 13:55:23">2026-03-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/26/LeetCode-3848-Check-Digitorial-Permutation%EF%BC%88Weekly-Contest-490%EF%BC%89/" title="LeetCode-3848. Check Digitorial Permutation（Weekly Contest 490）">LeetCode-3848. Check Digitorial Permutation（Weekly Contest 490）</a><time datetime="2026-02-26T03:02:43.000Z" title="發表於 2026-02-26 11:02:43">2026-02-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/26/LeetCode-20-Valid-Parentheses/" title="LeetCode-20. Valid Parentheses">LeetCode-20. Valid Parentheses</a><time datetime="2026-02-26T02:42:10.000Z" title="發表於 2026-02-26 10:42:10">2026-02-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/26/LeetCode-3847-Find-the-Score-Difference-in-a-Game%EF%BC%88Weekly-Contest-490%EF%BC%89/" title="LeetCode-3847. Find the Score Difference in a Game（Weekly Contest 490）">LeetCode-3847. Find the Score Difference in a Game（Weekly Contest 490）</a><time datetime="2026-02-26T02:38:05.000Z" title="發表於 2026-02-26 10:38:05">2026-02-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/19/LeetCode-3842-Toggle-Light-Bulbs%EF%BC%88Weekly-Contest-489%EF%BC%89/" title="LeetCode-3842. Toggle Light Bulbs（Weekly Contest 489）">LeetCode-3842. Toggle Light Bulbs（Weekly Contest 489）</a><time datetime="2026-02-19T02:41:26.000Z" title="發表於 2026-02-19 10:41:26">2026-02-19</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By Jane Doe</span><span class="framework-info"><span>框架 </span><a href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主題 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="閱讀模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日夜模式切換"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="單欄和雙欄切換"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="設定"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目錄"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到頂端"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
